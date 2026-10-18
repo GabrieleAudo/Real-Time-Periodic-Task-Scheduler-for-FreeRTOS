@@ -14,22 +14,22 @@
 
 ## Team & Work Division
 
-- Gabriele Audo (s349636): 
+- Gabriele Audo: 
     - **Competencies**: Periodic Task Layer Scheduler 
     - **Files**: ptl_scheduler.c, ptl_scheduler.h, ptl_config.h
-- Pietro Ala (s352318):
+- Pietro Ala:
     - **Competencies**: Aperiodic job submission and queue management
     - **Files**: aperiodic_tasks.c, aperiodic_tasks.h
-- Gabriele Loguercio Polosa (s348818):
+- Gabriele Loguercio Polosa:
   - **Competencies**: Polling Server
   - **Files**: PollingServer.c, PollingServer.h
-- Andrea De Vito (s349609):
+- Andrea De Vito:
     - **Competencies**: Trace and monitoring system
     - **Files**: ptl_types.h, trace.h, trace.c
-- Ivan Maria Puzelli (s348538):
+- Ivan Maria Puzelli:
     - **Competencies**: Configurator, Testing auto run and definition, Polling Server  debugging, Overhead calculation. 
     - **Files**: configurator.py, test*.c, PollingServer.c , main.c
-- Davide Di Pasquale (s348493):
+- Davide Di Pasquale:
     - **Competencies**: Test the entire system
     - **Files**: test*.c
 
