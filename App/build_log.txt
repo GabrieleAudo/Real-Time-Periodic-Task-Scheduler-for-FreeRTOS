@@ -1,0 +1,31 @@
+mkdir -p ./Output
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/list.c -o Output/list.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/tasks.c -o Output/tasks.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/portable/MemMang/heap_4.c -o Output/heap_4.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c -o Output/port.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/queue.c -o Output/queue.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ../FreeRTOS/FreeRTOS/Source/timers.c -o Output/timers.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c main.c -o Output/main.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c uart.c -o Output/uart.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c trace.c -o Output/trace.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c ptl_scheduler.c -o Output/ptl_scheduler.o
+ptl_scheduler.c: In function 'prvReleaseTimerCallback':
+ptl_scheduler.c:150:9: warning: enumeration value 'ePolicyDefault' not handled in switch [-Wswitch]
+  150 |         switch (xPolicy)
+      |         ^~~~~~
+ptl_scheduler.c: In function 'vPtlStart':
+ptl_scheduler.c:436:20: warning: unused variable 'xPeriodTicks' [-Wunused-variable]
+  436 |         TickType_t xPeriodTicks = pdMS_TO_TICKS(pxTcb->pxConfig->ulPeriodMs); // converts period in ticks
+      |                    ^~~~~~~~~~~~
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c aperiodic_tasks.c -o Output/aperiodic_tasks.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c PollingServer.c -o Output/PollingServer.o
+arm-none-eabi-gcc -I../FreeRTOS/FreeRTOS/Source/include -I../FreeRTOS/FreeRTOS/Source/portable/GCC/ARM_CM3 -I. -ffreestanding -mcpu=cortex-m3 -mthumb -Wall -Wextra -Wshadow -g3 -Os -ffunction-sections -fdata-sections -c startup.c -o Output/startup.o
+echo "\n\n--- Final linking ---\n"
+
+
+--- Final linking ---
+
+arm-none-eabi-gcc -T ./mps2_m3.ld -nostartfiles -specs=nano.specs -specs=nosys.specs -Xlinker -Map=./Output/demo.map -Xlinker --gc-sections -mcpu=cortex-m3 -mthumb ./Output/list.o ./Output/tasks.o ./Output/heap_4.o ./Output/port.o ./Output/queue.o ./Output/timers.o ./Output/main.o ./Output/uart.o ./Output/trace.o ./Output/ptl_scheduler.o ./Output/aperiodic_tasks.o ./Output/PollingServer.o ./Output/startup.o -o ./Output/demo.elf
+arm-none-eabi-size ./Output/demo.elf
+   text	   data	    bss	    dec	    hex	filename
+  15775	    596	 223841	 240212	  3aa54	./Output/demo.elf

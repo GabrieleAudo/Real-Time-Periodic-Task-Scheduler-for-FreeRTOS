@@ -1,0 +1,25 @@
+{
+    "policy": "ePolicySkip",
+    "tasks": [
+        {
+            "name": "1",
+            "period": 200,
+            "compute": 10,
+            "deadline": 20,
+            "offset": 5
+        },
+        {
+            "name": "2",
+            "period": 200,
+            "compute": 150,
+            "deadline": 175,
+            "offset": 0
+        }
+    ],
+    "ps_config": {
+        "period": 500,
+        "capacity": 200,
+        "tasks": [],
+        "random_injection": false
+    }
+}

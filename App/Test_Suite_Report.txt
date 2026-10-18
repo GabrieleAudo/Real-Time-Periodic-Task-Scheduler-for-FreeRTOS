@@ -1,0 +1,2224 @@
+========== COMPLETE TEST SUITE REPORT ==========
+
+
+--- START TRACE [TEST 1] ---
+
+=== Test 01: Normal periodic execution ===
+
+--- TEST 01 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 52
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        Periodic        TaskB            1            release                0
+16       Periodic        TaskA            1            complete               16
+26       Periodic        TaskB            1            complete               26
+100      Periodic        TaskA            2            release                0
+115      Periodic        TaskA            2            complete               15
+150      Periodic        TaskB            2            release                0
+175      Periodic        TaskB            2            complete               25
+200      Periodic        TaskA            3            release                0
+215      Periodic        TaskA            3            complete               15
+300      Periodic        TaskB            3            release                0
+300      Periodic        TaskA            4            release                0
+317      Periodic        TaskA            4            complete               17
+325      Periodic        TaskB            3            complete               25
+400      Periodic        TaskA            5            release                0
+415      Periodic        TaskA            5            complete               15
+450      Periodic        TaskB            4            release                0
+475      Periodic        TaskB            4            complete               25
+500      Periodic        TaskA            6            release                0
+515      Periodic        TaskA            6            complete               15
+600      Periodic        TaskB            5            release                0
+600      Periodic        TaskA            7            release                0
+617      Periodic        TaskA            7            complete               17
+625      Periodic        TaskB            5            complete               25
+700      Periodic        TaskA            8            release                0
+715      Periodic        TaskA            8            complete               15
+750      Periodic        TaskB            6            release                0
+775      Periodic        TaskB            6            complete               25
+800      Periodic        TaskA            9            release                0
+815      Periodic        TaskA            9            complete               15
+900      Periodic        TaskB            7            release                0
+900      Periodic        TaskA            10           release                0
+917      Periodic        TaskA            10           complete               17
+925      Periodic        TaskB            7            complete               25
+1000     Periodic        TaskA            11           release                0
+1015     Periodic        TaskA            11           complete               15
+1050     Periodic        TaskB            8            release                0
+1075     Periodic        TaskB            8            complete               25
+1100     Periodic        TaskA            12           release                0
+1115     Periodic        TaskA            12           complete               15
+1200     Periodic        TaskB            9            release                0
+1200     Periodic        TaskA            13           release                0
+1217     Periodic        TaskA            13           complete               17
+1225     Periodic        TaskB            9            complete               25
+1300     Periodic        TaskA            14           release                0
+1315     Periodic        TaskA            14           complete               15
+1350     Periodic        TaskB            10           release                0
+1375     Periodic        TaskB            10           complete               25
+1400     Periodic        TaskA            15           release                0
+1415     Periodic        TaskA            15           complete               15
+1500     Periodic        TaskB            11           release                0
+1500     Periodic        TaskA            16           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Normal execution verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            16    15    0        0         0         15       17    
+TaskB            11    10    0        0         0         25       26    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 1] ---
+
+
+--- START TRACE [TEST 2] ---
+
+=== Test 02: Deadline Miss ===
+
+--- TEST 02 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 22
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        Sampler          1            release                0
+20       Periodic        Sampler          1            complete               20
+200      Periodic        Sampler          2            release                0
+220      Periodic        Sampler          2            complete               20
+400      Periodic        Sampler          3            release                0
+520      Periodic        Sampler          3            deadline miss          480
+520      Periodic        Sampler          3            complete               120
+600      Periodic        Sampler          4            release                0
+620      Periodic        Sampler          4            complete               20
+800      Periodic        Sampler          5            release                0
+820      Periodic        Sampler          5            complete               20
+1000     Periodic        Sampler          6            release                0
+1020     Periodic        Sampler          6            complete               20
+1200     Periodic        Sampler          7            release                0
+1220     Periodic        Sampler          7            complete               20
+1400     Periodic        Sampler          8            release                0
+1420     Periodic        Sampler          8            complete               20
+1600     Periodic        Sampler          9            release                0
+1620     Periodic        Sampler          9            complete               20
+1800     Periodic        Sampler          10           release                0
+1820     Periodic        Sampler          10           complete               20
+2000     Periodic        Sampler          11           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Deadline miss detected without overrun.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+Sampler          11    10    1        9         0         30       120   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 2] ---
+
+
+--- START TRACE [TEST 3] ---
+
+=== TEST 03: Overrun - SKIP policy ===
+
+--- TEST 03 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 30
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+10       Periodic        TaskA            1            complete               10
+200      Periodic        TaskA            2            release                0
+210      Periodic        TaskA            2            complete               10
+400      Periodic        TaskA            3            release                0
+600      Periodic        TaskA            3            overrun -> skip        200
+800      Periodic        TaskA            3            overrun -> skip        200
+850      Periodic        TaskA            3            deadline miss          600
+850      Periodic        TaskA            3            complete               450
+1000     Periodic        TaskA            4            release                0
+1010     Periodic        TaskA            4            complete               10
+1200     Periodic        TaskA            5            release                0
+1210     Periodic        TaskA            5            complete               10
+1400     Periodic        TaskA            6            release                0
+1410     Periodic        TaskA            6            complete               10
+1600     Periodic        TaskA            7            release                0
+1610     Periodic        TaskA            7            complete               10
+1800     Periodic        TaskA            8            release                0
+1810     Periodic        TaskA            8            complete               10
+2000     Periodic        TaskA            9            release                0
+2010     Periodic        TaskA            9            complete               10
+2200     Periodic        TaskA            10           release                0
+2210     Periodic        TaskA            10           complete               10
+2400     Periodic        TaskA            11           release                0
+2410     Periodic        TaskA            11           complete               10
+2600     Periodic        TaskA            12           release                0
+2610     Periodic        TaskA            12           complete               10
+2800     Periodic        TaskA            13           release                0
+2810     Periodic        TaskA            13           complete               10
+3000     Periodic        TaskA            14           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Period overrun and SKIP policy signature verified (13 completed).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            14    13    1        7         2         43       450   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 3] ---
+
+
+--- START TRACE [TEST 4] ---
+
+=== TEST 04: Overrun - KILL policy ===
+
+--- TEST 04 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 31
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+10       Periodic        TaskA            1            complete               10
+200      Periodic        TaskA            2            release                0
+210      Periodic        TaskA            2            complete               10
+400      Periodic        TaskA            3            release                0
+600      Periodic        TaskA            3            overrun -> kill        200
+600      Periodic        TaskA            4            release                0
+610      Periodic        TaskA            4            complete               10
+800      Periodic        TaskA            5            release                0
+810      Periodic        TaskA            5            complete               10
+1000     Periodic        TaskA            6            release                0
+1010     Periodic        TaskA            6            complete               10
+1200     Periodic        TaskA            7            release                0
+1210     Periodic        TaskA            7            complete               10
+1400     Periodic        TaskA            8            release                0
+1410     Periodic        TaskA            8            complete               10
+1600     Periodic        TaskA            9            release                0
+1610     Periodic        TaskA            9            complete               10
+1800     Periodic        TaskA            10           release                0
+1810     Periodic        TaskA            10           complete               10
+2000     Periodic        TaskA            11           release                0
+2010     Periodic        TaskA            11           complete               10
+2200     Periodic        TaskA            12           release                0
+2210     Periodic        TaskA            12           complete               10
+2400     Periodic        TaskA            13           release                0
+2410     Periodic        TaskA            13           complete               10
+2600     Periodic        TaskA            14           release                0
+2610     Periodic        TaskA            14           complete               10
+2800     Periodic        TaskA            15           release                0
+2810     Periodic        TaskA            15           complete               10
+3000     Periodic        TaskA            16           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Period overrun and KILL policy signature verified (14 completed).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            16    14    0        0         1         10       10    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 4] ---
+
+
+--- START TRACE [TEST 5] ---
+
+=== Test 05: Overrun - CATCH-UP Policy ===
+
+--- TEST 05 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 33
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        Task             1            release                0
+11       Periodic        Task             1            complete               11
+200      Periodic        Task             2            release                0
+210      Periodic        Task             2            complete               10
+400      Periodic        Task             3            release                0
+600      Periodic        Task             3            overrun -> catchup     200
+600      Periodic        Task             4            release                0
+650      Periodic        Task             4            deadline miss          600
+650      Periodic        Task             4            complete               250
+660      Periodic        Task             4            complete               10
+800      Periodic        Task             5            release                0
+810      Periodic        Task             5            complete               10
+1000     Periodic        Task             6            release                0
+1010     Periodic        Task             6            complete               10
+1200     Periodic        Task             7            release                0
+1210     Periodic        Task             7            complete               10
+1400     Periodic        Task             8            release                0
+1410     Periodic        Task             8            complete               10
+1600     Periodic        Task             9            release                0
+1610     Periodic        Task             9            complete               10
+1800     Periodic        Task             10           release                0
+1810     Periodic        Task             10           complete               10
+2000     Periodic        Task             11           release                0
+2010     Periodic        Task             11           complete               10
+2200     Periodic        Task             12           release                0
+2210     Periodic        Task             12           complete               10
+2400     Periodic        Task             13           release                0
+2410     Periodic        Task             13           complete               10
+2600     Periodic        Task             14           release                0
+2610     Periodic        Task             14           complete               10
+2800     Periodic        Task             15           release                0
+2810     Periodic        Task             15           complete               10
+3000     Periodic        Task             16           release                0
+=== TRACE DUMP END ===
+
+--- END --- 
+
+[VERDICT] PASS - Period overrun and CATCH-UP policy signature verified (15 completed).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+Task             16    15    1        6         1         26       250   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 5] ---
+
+
+--- START TRACE [TEST 6] ---
+
+=== TEST 06: Aperiodic tasks - normal execution ===
+
+--- TEST 06 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 25
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+2        PollingServer   PollSrv          1            server refill          300
+2        Aperiodic       JobA             1            release                0
+33       Aperiodic       JobA             1            complete               0
+33       Aperiodic       JobB             1            release                0
+83       Aperiodic       JobB             1            complete               0
+83       PollingServer   PollSrv          1            server refill          83
+500      PollingServer   PollSrv          2            release                0
+500      PollingServer   PollSrv          2            server refill          300
+500      PollingServer   PollSrv          2            server refill          0
+1000     PollingServer   PollSrv          3            release                0
+1000     PollingServer   PollSrv          3            server refill          300
+1000     PollingServer   PollSrv          3            server refill          0
+1500     PollingServer   PollSrv          4            release                0
+1500     PollingServer   PollSrv          4            server refill          300
+1500     PollingServer   PollSrv          4            server refill          0
+2000     PollingServer   PollSrv          5            release                0
+2000     PollingServer   PollSrv          5            server refill          300
+2000     PollingServer   PollSrv          5            server refill          0
+2500     PollingServer   PollSrv          6            release                0
+2500     PollingServer   PollSrv          6            server refill          300
+2500     PollingServer   PollSrv          6            server refill          0
+3000     PollingServer   PollSrv          7            release                0
+3000     PollingServer   PollSrv          7            server refill          300
+3000     PollingServer   PollSrv          7            server refill          0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Normal aperiodic execution verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          7     7     0        0         0         11       83    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 6] ---
+
+
+--- START TRACE [TEST 7] ---
+
+=== TEST 07: Polling Server - Overrun policy ===
+
+--- TEST 07 TRACE DUMP --- 
+
+=== TRACE DUMP START ===
+Total records: 24
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+2        PollingServer   PollSrv          1            server refill          400
+2        Aperiodic       JobX             1            release                0
+82       Aperiodic       JobX             1            aperiodic overrun      80
+153      Aperiodic       JobX             1            complete               0
+153      PollingServer   PollSrv          1            server refill          153
+500      PollingServer   PollSrv          2            release                0
+500      PollingServer   PollSrv          2            server refill          400
+500      PollingServer   PollSrv          2            server refill          0
+1000     PollingServer   PollSrv          3            release                0
+1000     PollingServer   PollSrv          3            server refill          400
+1000     PollingServer   PollSrv          3            server refill          0
+1500     PollingServer   PollSrv          4            release                0
+1500     PollingServer   PollSrv          4            server refill          400
+1500     PollingServer   PollSrv          4            server refill          0
+2000     PollingServer   PollSrv          5            release                0
+2000     PollingServer   PollSrv          5            server refill          400
+2000     PollingServer   PollSrv          5            server refill          0
+2500     PollingServer   PollSrv          6            release                0
+2500     PollingServer   PollSrv          6            server refill          400
+2500     PollingServer   PollSrv          6            server refill          0
+3000     PollingServer   PollSrv          7            release                0
+3000     PollingServer   PollSrv          7            server refill          400
+3000     PollingServer   PollSrv          7            server refill          0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Aperiodic overrun policy verified (1 soft miss, 0 kills).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          7     7     0        0         0         21       153   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 7] ---
+
+
+--- START TRACE [TEST 8] ---
+
+=== TEST 08: Polling Server - KILL policy ===
+
+--- TEST 08 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 23
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+2        PollingServer   PollSrv          1            server refill          400
+2        Aperiodic       JobKill          1            release                0
+82       Aperiodic       JobKill          1            aperiodic kill         80
+82       Aperiodic       JobOk            1            release                0
+112      Aperiodic       JobOk            1            complete               0
+112      PollingServer   PollSrv          1            server refill          112
+500      PollingServer   PollSrv          2            release                0
+500      PollingServer   PollSrv          2            server refill          400
+500      PollingServer   PollSrv          2            server refill          0
+1000     PollingServer   PollSrv          3            release                0
+1000     PollingServer   PollSrv          3            server refill          400
+1000     PollingServer   PollSrv          3            server refill          0
+1500     PollingServer   PollSrv          4            release                0
+1500     PollingServer   PollSrv          4            server refill          400
+1500     PollingServer   PollSrv          4            server refill          0
+2000     PollingServer   PollSrv          5            release                0
+2000     PollingServer   PollSrv          5            server refill          400
+2000     PollingServer   PollSrv          5            server refill          0
+2500     PollingServer   PollSrv          6            release                0
+2500     PollingServer   PollSrv          6            server refill          400
+2500     PollingServer   PollSrv          6            server refill          0
+3000     PollingServer   PollSrv          7            release                0
+=== TRACE DUMP END ===
+
+--- END --- 
+
+[VERDICT] PASS - Aperiodic kill policy verified (0 soft misses, 1 kill).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          7     6     0        0         0         18       112   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 8] ---
+
+
+--- START TRACE [TEST 9] ---
+
+=== TEST 09: Combination of periodic task and aperiodic tasks ===
+
+--- TEST 09 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 66
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        PollingServer   PollSrv          1            release                0
+2        PollingServer   PollSrv          1            server refill          200
+2        Aperiodic       JobA             1            release                0
+22       Periodic        TaskA            1            complete               22
+33       Aperiodic       JobA             1            complete               0
+33       Aperiodic       JobB             1            release                0
+73       Aperiodic       JobB             1            complete               0
+73       PollingServer   PollSrv          1            server refill          73
+200      Periodic        TaskA            2            release                0
+221      Periodic        TaskA            2            complete               21
+300      PollingServer   PollSrv          2            release                0
+300      PollingServer   PollSrv          2            server refill          200
+300      PollingServer   PollSrv          2            server refill          0
+400      Periodic        TaskA            3            release                0
+420      Periodic        TaskA            3            complete               20
+600      PollingServer   PollSrv          3            release                0
+600      Periodic        TaskA            4            release                0
+600      PollingServer   PollSrv          3            server refill          200
+600      PollingServer   PollSrv          3            server refill          0
+620      Periodic        TaskA            4            complete               20
+800      Periodic        TaskA            5            release                0
+820      Periodic        TaskA            5            complete               20
+900      PollingServer   PollSrv          4            release                0
+900      PollingServer   PollSrv          4            server refill          200
+900      PollingServer   PollSrv          4            server refill          0
+1000     Periodic        TaskA            6            release                0
+1020     Periodic        TaskA            6            complete               20
+1200     PollingServer   PollSrv          5            release                0
+1200     Periodic        TaskA            7            release                0
+1200     PollingServer   PollSrv          5            server refill          200
+1200     PollingServer   PollSrv          5            server refill          0
+1220     Periodic        TaskA            7            complete               20
+1400     Periodic        TaskA            8            release                0
+1420     Periodic        TaskA            8            complete               20
+1500     PollingServer   PollSrv          6            release                0
+1500     PollingServer   PollSrv          6            server refill          200
+1500     PollingServer   PollSrv          6            server refill          0
+1600     Periodic        TaskA            9            release                0
+1620     Periodic        TaskA            9            complete               20
+1800     PollingServer   PollSrv          7            release                0
+1800     Periodic        TaskA            10           release                0
+1800     PollingServer   PollSrv          7            server refill          200
+1800     PollingServer   PollSrv          7            server refill          0
+1820     Periodic        TaskA            10           complete               20
+2000     Periodic        TaskA            11           release                0
+2020     Periodic        TaskA            11           complete               20
+2100     PollingServer   PollSrv          8            release                0
+2100     PollingServer   PollSrv          8            server refill          200
+2100     PollingServer   PollSrv          8            server refill          0
+2200     Periodic        TaskA            12           release                0
+2220     Periodic        TaskA            12           complete               20
+2400     PollingServer   PollSrv          9            release                0
+2400     Periodic        TaskA            13           release                0
+2400     PollingServer   PollSrv          9            server refill          200
+2400     PollingServer   PollSrv          9            server refill          0
+2420     Periodic        TaskA            13           complete               20
+2600     Periodic        TaskA            14           release                0
+2620     Periodic        TaskA            14           complete               20
+2700     PollingServer   PollSrv          10           release                0
+2700     PollingServer   PollSrv          10           server refill          200
+2700     PollingServer   PollSrv          10           server refill          0
+2800     Periodic        TaskA            15           release                0
+2820     Periodic        TaskA            15           complete               20
+3000     PollingServer   PollSrv          11           release                0
+3000     Periodic        TaskA            16           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Combo execution perfectly stable (15 Periodic, 2 Aperiodic).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            16    15    0        0         0         20       22    
+PollSrv          11    10    0        0         0         7        73    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 9] ---
+
+
+--- START TRACE [TEST 10] ---
+
+=== TEST 10: Periodic tasks with phase offsets ===
+
+--- TEST 10 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 41
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+16       Periodic        TaskA            1            complete               16
+100      Periodic        TaskB            1            release                0
+115      Periodic        TaskB            1            complete               15
+200      Periodic        TaskA            2            release                0
+215      Periodic        TaskA            2            complete               15
+300      Periodic        TaskB            2            release                0
+315      Periodic        TaskB            2            complete               15
+400      Periodic        TaskA            3            release                0
+415      Periodic        TaskA            3            complete               15
+500      Periodic        TaskB            3            release                0
+515      Periodic        TaskB            3            complete               15
+600      Periodic        TaskA            4            release                0
+615      Periodic        TaskA            4            complete               15
+700      Periodic        TaskB            4            release                0
+715      Periodic        TaskB            4            complete               15
+800      Periodic        TaskA            5            release                0
+815      Periodic        TaskA            5            complete               15
+900      Periodic        TaskB            5            release                0
+915      Periodic        TaskB            5            complete               15
+1000     Periodic        TaskA            6            release                0
+1015     Periodic        TaskA            6            complete               15
+1100     Periodic        TaskB            6            release                0
+1115     Periodic        TaskB            6            complete               15
+1200     Periodic        TaskA            7            release                0
+1215     Periodic        TaskA            7            complete               15
+1300     Periodic        TaskB            7            release                0
+1315     Periodic        TaskB            7            complete               15
+1400     Periodic        TaskA            8            release                0
+1415     Periodic        TaskA            8            complete               15
+1500     Periodic        TaskB            8            release                0
+1515     Periodic        TaskB            8            complete               15
+1600     Periodic        TaskA            9            release                0
+1615     Periodic        TaskA            9            complete               15
+1700     Periodic        TaskB            9            release                0
+1715     Periodic        TaskB            9            complete               15
+1800     Periodic        TaskA            10           release                0
+1815     Periodic        TaskA            10           complete               15
+1900     Periodic        TaskB            10           release                0
+1915     Periodic        TaskB            10           complete               15
+2000     Periodic        TaskA            11           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Phase offsets verified (10 completions each).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            11    10    0        0         0         15       16    
+TaskB            10    10    0        0         0         15       15    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 10] ---
+
+
+--- START TRACE [TEST 11] ---
+
+=== TEST 11: Multiple periodic tasks - one deadline miss, one always ok ===
+
+--- TEST 11 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 53
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        Periodic        TaskB            1            release                0
+20       Periodic        TaskA            1            complete               20
+21       Periodic        TaskB            1            complete               21
+200      Periodic        TaskA            2            release                0
+220      Periodic        TaskA            2            complete               20
+300      Periodic        TaskB            2            release                0
+320      Periodic        TaskB            2            complete               20
+400      Periodic        TaskA            3            release                0
+500      Periodic        TaskA            3            deadline miss          480
+500      Periodic        TaskA            3            complete               100
+600      Periodic        TaskB            3            release                0
+600      Periodic        TaskA            4            release                0
+620      Periodic        TaskB            3            complete               20
+621      Periodic        TaskA            4            complete               21
+800      Periodic        TaskA            5            release                0
+820      Periodic        TaskA            5            complete               20
+900      Periodic        TaskB            4            release                0
+920      Periodic        TaskB            4            complete               20
+1000     Periodic        TaskA            6            release                0
+1020     Periodic        TaskA            6            complete               20
+1200     Periodic        TaskB            5            release                0
+1200     Periodic        TaskA            7            release                0
+1220     Periodic        TaskB            5            complete               20
+1221     Periodic        TaskA            7            complete               21
+1400     Periodic        TaskA            8            release                0
+1420     Periodic        TaskA            8            complete               20
+1500     Periodic        TaskB            6            release                0
+1520     Periodic        TaskB            6            complete               20
+1600     Periodic        TaskA            9            release                0
+1620     Periodic        TaskA            9            complete               20
+1800     Periodic        TaskB            7            release                0
+1800     Periodic        TaskA            10           release                0
+1820     Periodic        TaskB            7            complete               20
+1821     Periodic        TaskA            10           complete               21
+2000     Periodic        TaskA            11           release                0
+2020     Periodic        TaskA            11           complete               20
+2100     Periodic        TaskB            8            release                0
+2120     Periodic        TaskB            8            complete               20
+2200     Periodic        TaskA            12           release                0
+2220     Periodic        TaskA            12           complete               20
+2400     Periodic        TaskB            9            release                0
+2400     Periodic        TaskA            13           release                0
+2420     Periodic        TaskB            9            complete               20
+2421     Periodic        TaskA            13           complete               21
+2600     Periodic        TaskA            14           release                0
+2620     Periodic        TaskA            14           complete               20
+2700     Periodic        TaskB            10           release                0
+2720     Periodic        TaskB            10           complete               20
+2800     Periodic        TaskA            15           release                0
+2820     Periodic        TaskA            15           complete               20
+3000     Periodic        TaskB            11           release                0
+3000     Periodic        TaskA            16           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Single deadline miss signature verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            16    15    1        6         0         25       100   
+TaskB            11    10    0        0         0         20       21    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 11] ---
+
+
+--- START TRACE [TEST 12] ---
+
+=== TEST 12: Polling Server - budget exhaustion === 
+
+--- TEST 12 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 29
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+1        PollingServer   PollSrv          1            server refill          100
+1        Aperiodic       JobA             1            release                0
+31       Aperiodic       JobA             1            aperiodic overrun      30
+41       Aperiodic       JobA             1            complete               0
+41       Aperiodic       JobB             1            release                0
+71       Aperiodic       JobB             1            aperiodic overrun      30
+81       Aperiodic       JobB             1            complete               0
+81       Aperiodic       JobC             1            release                0
+96       Aperiodic       JobC             1            aperiodic overrun      15
+101      PollingServer   PollSrv          1            server exhaust         0
+101      Aperiodic       JobC             1            aperiodic kill         15
+101      PollingServer   PollSrv          1            server refill          101
+500      PollingServer   PollSrv          2            release                0
+500      PollingServer   PollSrv          2            server refill          100
+500      PollingServer   PollSrv          2            server refill          0
+1000     PollingServer   PollSrv          3            release                0
+1000     PollingServer   PollSrv          3            server refill          100
+1000     PollingServer   PollSrv          3            server refill          0
+1500     PollingServer   PollSrv          4            release                0
+1500     PollingServer   PollSrv          4            server refill          100
+1500     PollingServer   PollSrv          4            server refill          0
+2000     PollingServer   PollSrv          5            release                0
+2000     PollingServer   PollSrv          5            server refill          100
+2000     PollingServer   PollSrv          5            server refill          0
+2500     PollingServer   PollSrv          6            release                0
+2500     PollingServer   PollSrv          6            server refill          100
+2500     PollingServer   PollSrv          6            server refill          0
+3000     PollingServer   PollSrv          7            release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Complex budget exhaustion signature verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          7     6     0        0         0         16       101   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 12] ---
+
+
+--- START TRACE [TEST 13] ---
+
+=== TEST 13: Stress - overlapping periodic tasks, concurrent overruns ===
+
+--- TEST 13 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 135
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        Periodic        TaskB            1            release                0
+0        Periodic        TaskC            1            release                0
+30       Periodic        TaskA            1            complete               30
+42       Periodic        TaskB            1            complete               42
+52       Periodic        TaskC            1            complete               52
+100      Periodic        TaskA            2            release                0
+150      Periodic        TaskB            2            release                0
+200      Periodic        TaskC            2            release                0
+200      Periodic        TaskA            2            overrun -> skip        100
+202      Periodic        TaskA            2            deadline miss          200
+202      Periodic        TaskA            2            complete               102
+300      Periodic        TaskB            2            overrun -> kill        150
+300      Periodic        TaskB            3            release                0
+300      Periodic        TaskA            3            release                0
+331      Periodic        TaskA            3            complete               31
+340      Periodic        TaskB            3            complete               40
+400      Periodic        TaskC            2            overrun -> catchup     200
+400      Periodic        TaskC            3            release                0
+400      Periodic        TaskA            4            release                0
+430      Periodic        TaskA            4            complete               30
+450      Periodic        TaskB            4            release                0
+451      Periodic        TaskC            3            deadline miss          400
+451      Periodic        TaskC            3            complete               251
+490      Periodic        TaskB            4            complete               40
+500      Periodic        TaskA            5            release                0
+501      Periodic        TaskC            3            complete               50
+530      Periodic        TaskA            5            complete               30
+600      Periodic        TaskC            4            release                0
+600      Periodic        TaskB            5            release                0
+600      Periodic        TaskA            6            release                0
+632      Periodic        TaskA            6            complete               32
+641      Periodic        TaskB            5            complete               41
+650      Periodic        TaskC            4            complete               50
+700      Periodic        TaskA            7            release                0
+730      Periodic        TaskA            7            complete               30
+750      Periodic        TaskB            6            release                0
+790      Periodic        TaskB            6            complete               40
+800      Periodic        TaskC            5            release                0
+800      Periodic        TaskA            8            release                0
+831      Periodic        TaskA            8            complete               31
+850      Periodic        TaskC            5            complete               50
+900      Periodic        TaskB            7            release                0
+900      Periodic        TaskA            9            release                0
+931      Periodic        TaskA            9            complete               31
+940      Periodic        TaskB            7            complete               40
+1000     Periodic        TaskC            6            release                0
+1000     Periodic        TaskA            10           release                0
+1031     Periodic        TaskA            10           complete               31
+1050     Periodic        TaskB            8            release                0
+1051     Periodic        TaskC            6            complete               51
+1090     Periodic        TaskB            8            complete               40
+1100     Periodic        TaskA            11           release                0
+1130     Periodic        TaskA            11           complete               30
+1200     Periodic        TaskC            7            release                0
+1200     Periodic        TaskB            9            release                0
+1200     Periodic        TaskA            12           release                0
+1232     Periodic        TaskA            12           complete               32
+1241     Periodic        TaskB            9            complete               41
+1250     Periodic        TaskC            7            complete               50
+1300     Periodic        TaskA            13           release                0
+1330     Periodic        TaskA            13           complete               30
+1350     Periodic        TaskB            10           release                0
+1390     Periodic        TaskB            10           complete               40
+1400     Periodic        TaskC            8            release                0
+1400     Periodic        TaskA            14           release                0
+1431     Periodic        TaskA            14           complete               31
+1450     Periodic        TaskC            8            complete               50
+1500     Periodic        TaskB            11           release                0
+1500     Periodic        TaskA            15           release                0
+1531     Periodic        TaskA            15           complete               31
+1540     Periodic        TaskB            11           complete               40
+1600     Periodic        TaskC            9            release                0
+1600     Periodic        TaskA            16           release                0
+1631     Periodic        TaskA            16           complete               31
+1650     Periodic        TaskB            12           release                0
+1651     Periodic        TaskC            9            complete               51
+1690     Periodic        TaskB            12           complete               40
+1700     Periodic        TaskA            17           release                0
+1730     Periodic        TaskA            17           complete               30
+1800     Periodic        TaskC            10           release                0
+1800     Periodic        TaskB            13           release                0
+1800     Periodic        TaskA            18           release                0
+1832     Periodic        TaskA            18           complete               32
+1841     Periodic        TaskB            13           complete               41
+1850     Periodic        TaskC            10           complete               50
+1900     Periodic        TaskA            19           release                0
+1930     Periodic        TaskA            19           complete               30
+1950     Periodic        TaskB            14           release                0
+1990     Periodic        TaskB            14           complete               40
+2000     Periodic        TaskC            11           release                0
+2000     Periodic        TaskA            20           release                0
+2031     Periodic        TaskA            20           complete               31
+2050     Periodic        TaskC            11           complete               50
+2100     Periodic        TaskB            15           release                0
+2100     Periodic        TaskA            21           release                0
+2131     Periodic        TaskA            21           complete               31
+2140     Periodic        TaskB            15           complete               40
+2200     Periodic        TaskC            12           release                0
+2200     Periodic        TaskA            22           release                0
+2231     Periodic        TaskA            22           complete               31
+2250     Periodic        TaskB            16           release                0
+2251     Periodic        TaskC            12           complete               51
+2290     Periodic        TaskB            16           complete               40
+2300     Periodic        TaskA            23           release                0
+2330     Periodic        TaskA            23           complete               30
+2400     Periodic        TaskC            13           release                0
+2400     Periodic        TaskB            17           release                0
+2400     Periodic        TaskA            24           release                0
+2432     Periodic        TaskA            24           complete               32
+2441     Periodic        TaskB            17           complete               41
+2450     Periodic        TaskC            13           complete               50
+2500     Periodic        TaskA            25           release                0
+2530     Periodic        TaskA            25           complete               30
+2550     Periodic        TaskB            18           release                0
+2590     Periodic        TaskB            18           complete               40
+2600     Periodic        TaskC            14           release                0
+2600     Periodic        TaskA            26           release                0
+2631     Periodic        TaskA            26           complete               31
+2650     Periodic        TaskC            14           complete               50
+2700     Periodic        TaskB            19           release                0
+2700     Periodic        TaskA            27           release                0
+2731     Periodic        TaskA            27           complete               31
+2740     Periodic        TaskB            19           complete               40
+2800     Periodic        TaskC            15           release                0
+2800     Periodic        TaskA            28           release                0
+2831     Periodic        TaskA            28           complete               31
+2850     Periodic        TaskB            20           release                0
+2851     Periodic        TaskC            15           complete               51
+2890     Periodic        TaskB            20           complete               40
+2900     Periodic        TaskA            29           release                0
+2930     Periodic        TaskA            29           complete               30
+3000     Periodic        TaskC            16           release                0
+3000     Periodic        TaskB            21           release                0
+3000     Periodic        TaskA            30           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Concurrent multi-policy stress signature verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            30    29    1        3         1         33       102   
+TaskB            21    19    0        0         1         40       42    
+TaskC            16    15    1        6         1         63       251   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 13] ---
+
+
+--- START TRACE [TEST 14] ---
+
+=== TEST 14: Edge case - minimal 1 ms phase gap between same-period tasks ===
+
+--- TEST 14 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 61
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+1        Periodic        TaskB            1            release                0
+2        Periodic        TaskC            1            release                0
+21       Periodic        TaskA            1            complete               21
+21       Periodic        TaskB            1            complete               20
+22       Periodic        TaskC            1            complete               20
+200      Periodic        TaskA            2            release                0
+201      Periodic        TaskB            2            release                0
+202      Periodic        TaskC            2            release                0
+220      Periodic        TaskA            2            complete               20
+221      Periodic        TaskB            2            complete               20
+223      Periodic        TaskC            2            complete               21
+400      Periodic        TaskA            3            release                0
+401      Periodic        TaskB            3            release                0
+402      Periodic        TaskC            3            release                0
+420      Periodic        TaskA            3            complete               20
+421      Periodic        TaskB            3            complete               20
+423      Periodic        TaskC            3            complete               21
+600      Periodic        TaskA            4            release                0
+601      Periodic        TaskB            4            release                0
+602      Periodic        TaskC            4            release                0
+620      Periodic        TaskA            4            complete               20
+621      Periodic        TaskB            4            complete               20
+623      Periodic        TaskC            4            complete               21
+800      Periodic        TaskA            5            release                0
+801      Periodic        TaskB            5            release                0
+802      Periodic        TaskC            5            release                0
+820      Periodic        TaskA            5            complete               20
+821      Periodic        TaskB            5            complete               20
+823      Periodic        TaskC            5            complete               21
+1000     Periodic        TaskA            6            release                0
+1001     Periodic        TaskB            6            release                0
+1002     Periodic        TaskC            6            release                0
+1020     Periodic        TaskA            6            complete               20
+1021     Periodic        TaskB            6            complete               20
+1023     Periodic        TaskC            6            complete               21
+1200     Periodic        TaskA            7            release                0
+1201     Periodic        TaskB            7            release                0
+1202     Periodic        TaskC            7            release                0
+1220     Periodic        TaskA            7            complete               20
+1221     Periodic        TaskB            7            complete               20
+1223     Periodic        TaskC            7            complete               21
+1400     Periodic        TaskA            8            release                0
+1401     Periodic        TaskB            8            release                0
+1402     Periodic        TaskC            8            release                0
+1420     Periodic        TaskA            8            complete               20
+1421     Periodic        TaskB            8            complete               20
+1423     Periodic        TaskC            8            complete               21
+1600     Periodic        TaskA            9            release                0
+1601     Periodic        TaskB            9            release                0
+1602     Periodic        TaskC            9            release                0
+1620     Periodic        TaskA            9            complete               20
+1621     Periodic        TaskB            9            complete               20
+1623     Periodic        TaskC            9            complete               21
+1800     Periodic        TaskA            10           release                0
+1801     Periodic        TaskB            10           release                0
+1802     Periodic        TaskC            10           release                0
+1820     Periodic        TaskA            10           complete               20
+1821     Periodic        TaskB            10           complete               20
+1823     Periodic        TaskC            10           complete               21
+2000     Periodic        TaskA            11           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Minimal phase gap execution perfectly stable.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            11    10    0        0         0         20       21    
+TaskB            11    10    0        0         0         20       20    
+TaskC            11    10    0        0         0         20       21    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 14] ---
+
+
+--- START TRACE [TEST 15] ---
+
+=== TEST 15: Preemption - high-priority task preempts low-priority task ===
+
+--- TEST 15 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 82
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskHigh         1            release                0
+0        Periodic        TaskLow          1            release                0
+10       Periodic        TaskHigh         1            complete               10
+90       Periodic        TaskLow          1            complete               90
+100      Periodic        TaskHigh         2            release                0
+110      Periodic        TaskHigh         2            complete               10
+200      Periodic        TaskHigh         3            release                0
+210      Periodic        TaskHigh         3            complete               10
+300      Periodic        TaskLow          2            release                0
+300      Periodic        TaskHigh         4            release                0
+310      Periodic        TaskHigh         4            complete               10
+390      Periodic        TaskLow          2            complete               90
+400      Periodic        TaskHigh         5            release                0
+410      Periodic        TaskHigh         5            complete               10
+500      Periodic        TaskHigh         6            release                0
+510      Periodic        TaskHigh         6            complete               10
+600      Periodic        TaskLow          3            release                0
+600      Periodic        TaskHigh         7            release                0
+610      Periodic        TaskHigh         7            complete               10
+690      Periodic        TaskLow          3            complete               90
+700      Periodic        TaskHigh         8            release                0
+710      Periodic        TaskHigh         8            complete               10
+800      Periodic        TaskHigh         9            release                0
+810      Periodic        TaskHigh         9            complete               10
+900      Periodic        TaskLow          4            release                0
+900      Periodic        TaskHigh         10           release                0
+910      Periodic        TaskHigh         10           complete               10
+990      Periodic        TaskLow          4            complete               90
+1000     Periodic        TaskHigh         11           release                0
+1010     Periodic        TaskHigh         11           complete               10
+1100     Periodic        TaskHigh         12           release                0
+1110     Periodic        TaskHigh         12           complete               10
+1200     Periodic        TaskLow          5            release                0
+1200     Periodic        TaskHigh         13           release                0
+1210     Periodic        TaskHigh         13           complete               10
+1290     Periodic        TaskLow          5            complete               90
+1300     Periodic        TaskHigh         14           release                0
+1310     Periodic        TaskHigh         14           complete               10
+1400     Periodic        TaskHigh         15           release                0
+1410     Periodic        TaskHigh         15           complete               10
+1500     Periodic        TaskLow          6            release                0
+1500     Periodic        TaskHigh         16           release                0
+1510     Periodic        TaskHigh         16           complete               10
+1590     Periodic        TaskLow          6            complete               90
+1600     Periodic        TaskHigh         17           release                0
+1610     Periodic        TaskHigh         17           complete               10
+1700     Periodic        TaskHigh         18           release                0
+1710     Periodic        TaskHigh         18           complete               10
+1800     Periodic        TaskLow          7            release                0
+1800     Periodic        TaskHigh         19           release                0
+1810     Periodic        TaskHigh         19           complete               10
+1890     Periodic        TaskLow          7            complete               90
+1900     Periodic        TaskHigh         20           release                0
+1910     Periodic        TaskHigh         20           complete               10
+2000     Periodic        TaskHigh         21           release                0
+2010     Periodic        TaskHigh         21           complete               10
+2100     Periodic        TaskLow          8            release                0
+2100     Periodic        TaskHigh         22           release                0
+2110     Periodic        TaskHigh         22           complete               10
+2190     Periodic        TaskLow          8            complete               90
+2200     Periodic        TaskHigh         23           release                0
+2210     Periodic        TaskHigh         23           complete               10
+2300     Periodic        TaskHigh         24           release                0
+2310     Periodic        TaskHigh         24           complete               10
+2400     Periodic        TaskLow          9            release                0
+2400     Periodic        TaskHigh         25           release                0
+2410     Periodic        TaskHigh         25           complete               10
+2490     Periodic        TaskLow          9            complete               90
+2500     Periodic        TaskHigh         26           release                0
+2510     Periodic        TaskHigh         26           complete               10
+2600     Periodic        TaskHigh         27           release                0
+2610     Periodic        TaskHigh         27           complete               10
+2700     Periodic        TaskLow          10           release                0
+2700     Periodic        TaskHigh         28           release                0
+2710     Periodic        TaskHigh         28           complete               10
+2790     Periodic        TaskLow          10           complete               90
+2800     Periodic        TaskHigh         29           release                0
+2810     Periodic        TaskHigh         29           complete               10
+2900     Periodic        TaskHigh         30           release                0
+2910     Periodic        TaskHigh         30           complete               10
+3000     Periodic        TaskLow          11           release                0
+3000     Periodic        TaskHigh         31           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Preemption dynamics perfectly verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskHigh         31    30    0        0         0         10       10    
+TaskLow          11    10    0        0         0         90       90    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 15] ---
+
+
+--- START TRACE [TEST 16] ---
+
+=== TEST 16: Timing consistency - high-frequency tasks over many activations ===
+
+--- TEST 16 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 263
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        Periodic        TaskB            1            release                0
+0        Periodic        TaskC            1            release                0
+15       Periodic        TaskA            1            complete               15
+21       Periodic        TaskB            1            complete               21
+27       Periodic        TaskC            1            complete               27
+50       Periodic        TaskA            2            release                0
+65       Periodic        TaskA            2            complete               15
+75       Periodic        TaskB            2            release                0
+95       Periodic        TaskB            2            complete               20
+100      Periodic        TaskC            2            release                0
+100      Periodic        TaskA            3            release                0
+117      Periodic        TaskA            3            complete               17
+125      Periodic        TaskC            2            complete               25
+150      Periodic        TaskB            3            release                0
+150      Periodic        TaskA            4            release                0
+167      Periodic        TaskA            4            complete               17
+170      Periodic        TaskB            3            complete               20
+200      Periodic        TaskC            3            release                0
+200      Periodic        TaskA            5            release                0
+217      Periodic        TaskA            5            complete               17
+225      Periodic        TaskB            4            release                0
+226      Periodic        TaskC            3            complete               26
+245      Periodic        TaskB            4            complete               20
+250      Periodic        TaskA            6            release                0
+265      Periodic        TaskA            6            complete               15
+300      Periodic        TaskC            4            release                0
+300      Periodic        TaskB            5            release                0
+300      Periodic        TaskA            7            release                0
+317      Periodic        TaskA            7            complete               17
+322      Periodic        TaskB            5            complete               22
+325      Periodic        TaskC            4            complete               25
+350      Periodic        TaskA            8            release                0
+365      Periodic        TaskA            8            complete               15
+375      Periodic        TaskB            6            release                0
+395      Periodic        TaskB            6            complete               20
+400      Periodic        TaskC            5            release                0
+400      Periodic        TaskA            9            release                0
+417      Periodic        TaskA            9            complete               17
+425      Periodic        TaskC            5            complete               25
+450      Periodic        TaskB            7            release                0
+450      Periodic        TaskA            10           release                0
+467      Periodic        TaskA            10           complete               17
+470      Periodic        TaskB            7            complete               20
+500      Periodic        TaskC            6            release                0
+500      Periodic        TaskA            11           release                0
+517      Periodic        TaskA            11           complete               17
+525      Periodic        TaskB            8            release                0
+526      Periodic        TaskC            6            complete               26
+545      Periodic        TaskB            8            complete               20
+550      Periodic        TaskA            12           release                0
+565      Periodic        TaskA            12           complete               15
+600      Periodic        TaskC            7            release                0
+600      Periodic        TaskB            9            release                0
+600      Periodic        TaskA            13           release                0
+617      Periodic        TaskA            13           complete               17
+622      Periodic        TaskB            9            complete               22
+625      Periodic        TaskC            7            complete               25
+650      Periodic        TaskA            14           release                0
+665      Periodic        TaskA            14           complete               15
+675      Periodic        TaskB            10           release                0
+695      Periodic        TaskB            10           complete               20
+700      Periodic        TaskC            8            release                0
+700      Periodic        TaskA            15           release                0
+717      Periodic        TaskA            15           complete               17
+725      Periodic        TaskC            8            complete               25
+750      Periodic        TaskB            11           release                0
+750      Periodic        TaskA            16           release                0
+767      Periodic        TaskA            16           complete               17
+770      Periodic        TaskB            11           complete               20
+800      Periodic        TaskC            9            release                0
+800      Periodic        TaskA            17           release                0
+817      Periodic        TaskA            17           complete               17
+825      Periodic        TaskB            12           release                0
+826      Periodic        TaskC            9            complete               26
+845      Periodic        TaskB            12           complete               20
+850      Periodic        TaskA            18           release                0
+865      Periodic        TaskA            18           complete               15
+900      Periodic        TaskC            10           release                0
+900      Periodic        TaskB            13           release                0
+900      Periodic        TaskA            19           release                0
+917      Periodic        TaskA            19           complete               17
+922      Periodic        TaskB            13           complete               22
+925      Periodic        TaskC            10           complete               25
+950      Periodic        TaskA            20           release                0
+965      Periodic        TaskA            20           complete               15
+975      Periodic        TaskB            14           release                0
+995      Periodic        TaskB            14           complete               20
+1000     Periodic        TaskC            11           release                0
+1000     Periodic        TaskA            21           release                0
+1017     Periodic        TaskA            21           complete               17
+1025     Periodic        TaskC            11           complete               25
+1050     Periodic        TaskB            15           release                0
+1050     Periodic        TaskA            22           release                0
+1067     Periodic        TaskA            22           complete               17
+1070     Periodic        TaskB            15           complete               20
+1100     Periodic        TaskC            12           release                0
+1100     Periodic        TaskA            23           release                0
+1117     Periodic        TaskA            23           complete               17
+1125     Periodic        TaskB            16           release                0
+1126     Periodic        TaskC            12           complete               26
+1145     Periodic        TaskB            16           complete               20
+1150     Periodic        TaskA            24           release                0
+1165     Periodic        TaskA            24           complete               15
+1200     Periodic        TaskC            13           release                0
+1200     Periodic        TaskB            17           release                0
+1200     Periodic        TaskA            25           release                0
+1217     Periodic        TaskA            25           complete               17
+1222     Periodic        TaskB            17           complete               22
+1225     Periodic        TaskC            13           complete               25
+1250     Periodic        TaskA            26           release                0
+1265     Periodic        TaskA            26           complete               15
+1275     Periodic        TaskB            18           release                0
+1295     Periodic        TaskB            18           complete               20
+1300     Periodic        TaskC            14           release                0
+1300     Periodic        TaskA            27           release                0
+1317     Periodic        TaskA            27           complete               17
+1325     Periodic        TaskC            14           complete               25
+1350     Periodic        TaskB            19           release                0
+1350     Periodic        TaskA            28           release                0
+1367     Periodic        TaskA            28           complete               17
+1370     Periodic        TaskB            19           complete               20
+1400     Periodic        TaskC            15           release                0
+1400     Periodic        TaskA            29           release                0
+1417     Periodic        TaskA            29           complete               17
+1425     Periodic        TaskB            20           release                0
+1426     Periodic        TaskC            15           complete               26
+1445     Periodic        TaskB            20           complete               20
+1450     Periodic        TaskA            30           release                0
+1465     Periodic        TaskA            30           complete               15
+1500     Periodic        TaskC            16           release                0
+1500     Periodic        TaskB            21           release                0
+1500     Periodic        TaskA            31           release                0
+1517     Periodic        TaskA            31           complete               17
+1522     Periodic        TaskB            21           complete               22
+1525     Periodic        TaskC            16           complete               25
+1550     Periodic        TaskA            32           release                0
+1565     Periodic        TaskA            32           complete               15
+1575     Periodic        TaskB            22           release                0
+1595     Periodic        TaskB            22           complete               20
+1600     Periodic        TaskC            17           release                0
+1600     Periodic        TaskA            33           release                0
+1617     Periodic        TaskA            33           complete               17
+1625     Periodic        TaskC            17           complete               25
+1650     Periodic        TaskB            23           release                0
+1650     Periodic        TaskA            34           release                0
+1667     Periodic        TaskA            34           complete               17
+1670     Periodic        TaskB            23           complete               20
+1700     Periodic        TaskC            18           release                0
+1700     Periodic        TaskA            35           release                0
+1717     Periodic        TaskA            35           complete               17
+1725     Periodic        TaskB            24           release                0
+1726     Periodic        TaskC            18           complete               26
+1745     Periodic        TaskB            24           complete               20
+1750     Periodic        TaskA            36           release                0
+1765     Periodic        TaskA            36           complete               15
+1800     Periodic        TaskC            19           release                0
+1800     Periodic        TaskB            25           release                0
+1800     Periodic        TaskA            37           release                0
+1817     Periodic        TaskA            37           complete               17
+1822     Periodic        TaskB            25           complete               22
+1825     Periodic        TaskC            19           complete               25
+1850     Periodic        TaskA            38           release                0
+1865     Periodic        TaskA            38           complete               15
+1875     Periodic        TaskB            26           release                0
+1895     Periodic        TaskB            26           complete               20
+1900     Periodic        TaskC            20           release                0
+1900     Periodic        TaskA            39           release                0
+1917     Periodic        TaskA            39           complete               17
+1925     Periodic        TaskC            20           complete               25
+1950     Periodic        TaskB            27           release                0
+1950     Periodic        TaskA            40           release                0
+1967     Periodic        TaskA            40           complete               17
+1970     Periodic        TaskB            27           complete               20
+2000     Periodic        TaskC            21           release                0
+2000     Periodic        TaskA            41           release                0
+2017     Periodic        TaskA            41           complete               17
+2025     Periodic        TaskB            28           release                0
+2026     Periodic        TaskC            21           complete               26
+2045     Periodic        TaskB            28           complete               20
+2050     Periodic        TaskA            42           release                0
+2065     Periodic        TaskA            42           complete               15
+2100     Periodic        TaskC            22           release                0
+2100     Periodic        TaskB            29           release                0
+2100     Periodic        TaskA            43           release                0
+2117     Periodic        TaskA            43           complete               17
+2122     Periodic        TaskB            29           complete               22
+2125     Periodic        TaskC            22           complete               25
+2150     Periodic        TaskA            44           release                0
+2165     Periodic        TaskA            44           complete               15
+2175     Periodic        TaskB            30           release                0
+2195     Periodic        TaskB            30           complete               20
+2200     Periodic        TaskC            23           release                0
+2200     Periodic        TaskA            45           release                0
+2217     Periodic        TaskA            45           complete               17
+2225     Periodic        TaskC            23           complete               25
+2250     Periodic        TaskB            31           release                0
+2250     Periodic        TaskA            46           release                0
+2267     Periodic        TaskA            46           complete               17
+2270     Periodic        TaskB            31           complete               20
+2300     Periodic        TaskC            24           release                0
+2300     Periodic        TaskA            47           release                0
+2317     Periodic        TaskA            47           complete               17
+2325     Periodic        TaskB            32           release                0
+2326     Periodic        TaskC            24           complete               26
+2345     Periodic        TaskB            32           complete               20
+2350     Periodic        TaskA            48           release                0
+2365     Periodic        TaskA            48           complete               15
+2400     Periodic        TaskC            25           release                0
+2400     Periodic        TaskB            33           release                0
+2400     Periodic        TaskA            49           release                0
+2417     Periodic        TaskA            49           complete               17
+2422     Periodic        TaskB            33           complete               22
+2425     Periodic        TaskC            25           complete               25
+2450     Periodic        TaskA            50           release                0
+2465     Periodic        TaskA            50           complete               15
+2475     Periodic        TaskB            34           release                0
+2495     Periodic        TaskB            34           complete               20
+2500     Periodic        TaskC            26           release                0
+2500     Periodic        TaskA            51           release                0
+2517     Periodic        TaskA            51           complete               17
+2525     Periodic        TaskC            26           complete               25
+2550     Periodic        TaskB            35           release                0
+2550     Periodic        TaskA            52           release                0
+2567     Periodic        TaskA            52           complete               17
+2570     Periodic        TaskB            35           complete               20
+2600     Periodic        TaskC            27           release                0
+2600     Periodic        TaskA            53           release                0
+2617     Periodic        TaskA            53           complete               17
+2625     Periodic        TaskB            36           release                0
+2626     Periodic        TaskC            27           complete               26
+2645     Periodic        TaskB            36           complete               20
+2650     Periodic        TaskA            54           release                0
+2665     Periodic        TaskA            54           complete               15
+2700     Periodic        TaskC            28           release                0
+2700     Periodic        TaskB            37           release                0
+2700     Periodic        TaskA            55           release                0
+2717     Periodic        TaskA            55           complete               17
+2722     Periodic        TaskB            37           complete               22
+2725     Periodic        TaskC            28           complete               25
+2750     Periodic        TaskA            56           release                0
+2765     Periodic        TaskA            56           complete               15
+2775     Periodic        TaskB            38           release                0
+2795     Periodic        TaskB            38           complete               20
+2800     Periodic        TaskC            29           release                0
+2800     Periodic        TaskA            57           release                0
+2817     Periodic        TaskA            57           complete               17
+2825     Periodic        TaskC            29           complete               25
+2850     Periodic        TaskB            39           release                0
+2850     Periodic        TaskA            58           release                0
+2867     Periodic        TaskA            58           complete               17
+2870     Periodic        TaskB            39           complete               20
+2900     Periodic        TaskC            30           release                0
+2900     Periodic        TaskA            59           release                0
+2917     Periodic        TaskA            59           complete               17
+2925     Periodic        TaskB            40           release                0
+2926     Periodic        TaskC            30           complete               26
+2945     Periodic        TaskB            40           complete               20
+2950     Periodic        TaskA            60           release                0
+2965     Periodic        TaskA            60           complete               15
+3000     Periodic        TaskC            31           release                0
+3000     Periodic        TaskB            41           release                0
+3000     Periodic        TaskA            61           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - High-frequency timing stability verified (130 total jobs).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            61    60    0        0         0         16       17    
+TaskB            41    40    0        0         0         20       22    
+TaskC            31    30    0        0         0         25       27    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 16] ---
+
+
+--- START TRACE [TEST 17] ---
+
+=== TEST 17: Polling Server stress - backlog with overruns and exhaustion ===
+
+--- TEST 17 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 55
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+2        PollingServer   PollSrv          1            server refill          80
+2        Aperiodic       JobA             1            release                0
+22       Aperiodic       JobA             1            aperiodic overrun      20
+32       Aperiodic       JobA             1            complete               0
+32       Aperiodic       JobB             1            release                0
+52       Aperiodic       JobB             1            aperiodic overrun      20
+62       Aperiodic       JobB             1            complete               0
+62       Aperiodic       JobC             1            release                0
+82       Aperiodic       JobC             1            aperiodic kill         60
+82       PollingServer   PollSrv          1            server exhaust         0
+83       PollingServer   PollSrv          1            server refill          83
+200      PollingServer   PollSrv          2            release                0
+200      PollingServer   PollSrv          2            server refill          80
+200      Aperiodic       JobD             1            release                0
+220      Aperiodic       JobD             1            complete               0
+220      Aperiodic       JobE             1            release                0
+240      Aperiodic       JobE             1            complete               0
+240      Aperiodic       JobF             1            release                0
+280      Aperiodic       JobF             1            aperiodic kill         60
+280      PollingServer   PollSrv          2            server exhaust         0
+280      PollingServer   PollSrv          2            server refill          80
+400      PollingServer   PollSrv          3            release                0
+400      PollingServer   PollSrv          3            server refill          80
+400      PollingServer   PollSrv          3            server refill          0
+600      PollingServer   PollSrv          4            release                0
+600      PollingServer   PollSrv          4            server refill          80
+600      PollingServer   PollSrv          4            server refill          0
+800      PollingServer   PollSrv          5            release                0
+800      PollingServer   PollSrv          5            server refill          80
+800      PollingServer   PollSrv          5            server refill          0
+1000     PollingServer   PollSrv          6            release                0
+1000     PollingServer   PollSrv          6            server refill          80
+1000     PollingServer   PollSrv          6            server refill          0
+1200     PollingServer   PollSrv          7            release                0
+1200     PollingServer   PollSrv          7            server refill          80
+1200     PollingServer   PollSrv          7            server refill          0
+1400     PollingServer   PollSrv          8            release                0
+1400     PollingServer   PollSrv          8            server refill          80
+1400     PollingServer   PollSrv          8            server refill          0
+1600     PollingServer   PollSrv          9            release                0
+1600     PollingServer   PollSrv          9            server refill          80
+1600     PollingServer   PollSrv          9            server refill          0
+1800     PollingServer   PollSrv          10           release                0
+1800     PollingServer   PollSrv          10           server refill          80
+1800     PollingServer   PollSrv          10           server refill          0
+2000     PollingServer   PollSrv          11           release                0
+2000     PollingServer   PollSrv          11           server refill          80
+2000     PollingServer   PollSrv          11           server refill          0
+2200     PollingServer   PollSrv          12           release                0
+2200     PollingServer   PollSrv          12           server refill          80
+2200     PollingServer   PollSrv          12           server refill          0
+2400     PollingServer   PollSrv          13           release                0
+2400     PollingServer   PollSrv          13           server refill          80
+2400     PollingServer   PollSrv          13           server refill          0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Backlog and exhaustion dynamics verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          13    13    0        0         0         12       83    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 17] ---
+
+
+--- START TRACE [TEST 18] ---
+
+=== TEST 18: Polling Server stress - max queue depth with KILL ===
+
+--- TEST 18 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 48
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+4        PollingServer   PollSrv          1            server refill          150
+4        Aperiodic       JobL1            1            release                0
+34       Aperiodic       JobL1            1            aperiodic kill         30
+35       Aperiodic       JobS1            1            release                0
+55       Aperiodic       JobS1            1            complete               0
+55       Aperiodic       JobL2            1            release                0
+85       Aperiodic       JobL2            1            aperiodic kill         30
+85       Aperiodic       JobS2            1            release                0
+105      Aperiodic       JobS2            1            complete               0
+105      Aperiodic       JobL3            1            release                0
+135      Aperiodic       JobL3            1            aperiodic kill         30
+135      Aperiodic       JobS3            1            release                0
+154      Aperiodic       JobS3            1            aperiodic kill         80
+154      PollingServer   PollSrv          1            server exhaust         0
+154      PollingServer   PollSrv          1            server refill          154
+300      PollingServer   PollSrv          2            release                0
+300      PollingServer   PollSrv          2            server refill          150
+300      Aperiodic       JobL4            1            release                0
+330      Aperiodic       JobL4            1            aperiodic kill         30
+330      Aperiodic       JobS4            1            release                0
+350      Aperiodic       JobS4            1            complete               0
+350      Aperiodic       JobL5            1            release                0
+380      Aperiodic       JobL5            1            aperiodic kill         30
+380      Aperiodic       JobS5            1            release                0
+400      Aperiodic       JobS5            1            complete               0
+400      PollingServer   PollSrv          2            server refill          100
+600      PollingServer   PollSrv          3            release                0
+600      PollingServer   PollSrv          3            server refill          150
+600      PollingServer   PollSrv          3            server refill          0
+900      PollingServer   PollSrv          4            release                0
+900      PollingServer   PollSrv          4            server refill          150
+900      PollingServer   PollSrv          4            server refill          0
+1200     PollingServer   PollSrv          5            release                0
+1200     PollingServer   PollSrv          5            server refill          150
+1200     PollingServer   PollSrv          5            server refill          0
+1500     PollingServer   PollSrv          6            release                0
+1500     PollingServer   PollSrv          6            server refill          150
+1500     PollingServer   PollSrv          6            server refill          0
+1800     PollingServer   PollSrv          7            release                0
+1800     PollingServer   PollSrv          7            server refill          150
+1800     PollingServer   PollSrv          7            server refill          0
+2100     PollingServer   PollSrv          8            release                0
+2100     PollingServer   PollSrv          8            server refill          150
+2100     PollingServer   PollSrv          8            server refill          0
+2400     PollingServer   PollSrv          9            release                0
+2400     PollingServer   PollSrv          9            server refill          150
+2400     PollingServer   PollSrv          9            server refill          0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Max queue depth and KILL backlog verified.
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          9     9     0        0         0         28       154   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 18] ---
+
+
+--- START TRACE [TEST 19] ---
+
+=== TEST 19: Round-Robin at equal priority ===
+
+--- TEST 19 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 123
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        TaskA            1            release                0
+0        Periodic        TaskB            1            release                0
+0        Periodic        TaskC            1            release                0
+31       Periodic        TaskA            1            complete               31
+33       Periodic        TaskB            1            complete               33
+33       Periodic        TaskC            1            complete               33
+150      Periodic        TaskA            2            release                0
+150      Periodic        TaskB            2            release                0
+150      Periodic        TaskC            2            release                0
+180      Periodic        TaskA            2            complete               30
+182      Periodic        TaskB            2            complete               32
+182      Periodic        TaskC            2            complete               32
+300      Periodic        TaskA            3            release                0
+300      Periodic        TaskB            3            release                0
+300      Periodic        TaskC            3            release                0
+330      Periodic        TaskA            3            complete               30
+332      Periodic        TaskB            3            complete               32
+332      Periodic        TaskC            3            complete               32
+450      Periodic        TaskA            4            release                0
+450      Periodic        TaskB            4            release                0
+450      Periodic        TaskC            4            release                0
+480      Periodic        TaskA            4            complete               30
+482      Periodic        TaskB            4            complete               32
+482      Periodic        TaskC            4            complete               32
+600      Periodic        TaskA            5            release                0
+600      Periodic        TaskB            5            release                0
+600      Periodic        TaskC            5            release                0
+630      Periodic        TaskA            5            complete               30
+632      Periodic        TaskB            5            complete               32
+632      Periodic        TaskC            5            complete               32
+750      Periodic        TaskA            6            release                0
+750      Periodic        TaskB            6            release                0
+750      Periodic        TaskC            6            release                0
+780      Periodic        TaskA            6            complete               30
+782      Periodic        TaskB            6            complete               32
+782      Periodic        TaskC            6            complete               32
+900      Periodic        TaskA            7            release                0
+900      Periodic        TaskB            7            release                0
+900      Periodic        TaskC            7            release                0
+930      Periodic        TaskA            7            complete               30
+932      Periodic        TaskB            7            complete               32
+932      Periodic        TaskC            7            complete               32
+1050     Periodic        TaskA            8            release                0
+1050     Periodic        TaskB            8            release                0
+1050     Periodic        TaskC            8            release                0
+1080     Periodic        TaskA            8            complete               30
+1082     Periodic        TaskB            8            complete               32
+1082     Periodic        TaskC            8            complete               32
+1200     Periodic        TaskA            9            release                0
+1200     Periodic        TaskB            9            release                0
+1200     Periodic        TaskC            9            release                0
+1230     Periodic        TaskA            9            complete               30
+1232     Periodic        TaskB            9            complete               32
+1232     Periodic        TaskC            9            complete               32
+1350     Periodic        TaskA            10           release                0
+1350     Periodic        TaskB            10           release                0
+1350     Periodic        TaskC            10           release                0
+1380     Periodic        TaskA            10           complete               30
+1382     Periodic        TaskB            10           complete               32
+1382     Periodic        TaskC            10           complete               32
+1500     Periodic        TaskA            11           release                0
+1500     Periodic        TaskB            11           release                0
+1500     Periodic        TaskC            11           release                0
+1530     Periodic        TaskA            11           complete               30
+1532     Periodic        TaskB            11           complete               32
+1532     Periodic        TaskC            11           complete               32
+1650     Periodic        TaskA            12           release                0
+1650     Periodic        TaskB            12           release                0
+1650     Periodic        TaskC            12           release                0
+1680     Periodic        TaskA            12           complete               30
+1682     Periodic        TaskB            12           complete               32
+1682     Periodic        TaskC            12           complete               32
+1800     Periodic        TaskA            13           release                0
+1800     Periodic        TaskB            13           release                0
+1800     Periodic        TaskC            13           release                0
+1830     Periodic        TaskA            13           complete               30
+1832     Periodic        TaskB            13           complete               32
+1832     Periodic        TaskC            13           complete               32
+1950     Periodic        TaskA            14           release                0
+1950     Periodic        TaskB            14           release                0
+1950     Periodic        TaskC            14           release                0
+1980     Periodic        TaskA            14           complete               30
+1982     Periodic        TaskB            14           complete               32
+1982     Periodic        TaskC            14           complete               32
+2100     Periodic        TaskA            15           release                0
+2100     Periodic        TaskB            15           release                0
+2100     Periodic        TaskC            15           release                0
+2130     Periodic        TaskA            15           complete               30
+2132     Periodic        TaskB            15           complete               32
+2132     Periodic        TaskC            15           complete               32
+2250     Periodic        TaskA            16           release                0
+2250     Periodic        TaskB            16           release                0
+2250     Periodic        TaskC            16           release                0
+2280     Periodic        TaskA            16           complete               30
+2282     Periodic        TaskB            16           complete               32
+2282     Periodic        TaskC            16           complete               32
+2400     Periodic        TaskA            17           release                0
+2400     Periodic        TaskB            17           release                0
+2400     Periodic        TaskC            17           release                0
+2430     Periodic        TaskA            17           complete               30
+2432     Periodic        TaskB            17           complete               32
+2432     Periodic        TaskC            17           complete               32
+2550     Periodic        TaskA            18           release                0
+2550     Periodic        TaskB            18           release                0
+2550     Periodic        TaskC            18           release                0
+2580     Periodic        TaskA            18           complete               30
+2582     Periodic        TaskB            18           complete               32
+2582     Periodic        TaskC            18           complete               32
+2700     Periodic        TaskA            19           release                0
+2700     Periodic        TaskB            19           release                0
+2700     Periodic        TaskC            19           release                0
+2730     Periodic        TaskA            19           complete               30
+2732     Periodic        TaskB            19           complete               32
+2732     Periodic        TaskC            19           complete               32
+2850     Periodic        TaskA            20           release                0
+2850     Periodic        TaskB            20           release                0
+2850     Periodic        TaskC            20           release                0
+2880     Periodic        TaskA            20           complete               30
+2882     Periodic        TaskB            20           complete               32
+2882     Periodic        TaskC            20           complete               32
+3000     Periodic        TaskA            21           release                0
+3000     Periodic        TaskB            21           release                0
+3000     Periodic        TaskC            21           release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Round-Robin time-slicing mathematically verified (WCRT <= 35ms for all).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+TaskA            21    20    0        0         0         30       31    
+TaskB            21    20    0        0         0         32       33    
+TaskC            21    20    0        0         0         32       33    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 19] ---
+
+
+--- START TRACE [TEST 20] ---
+
+=== TEST 20: Maximum tasks stress test (Hyperbolic Bound) ===
+
+--- TEST 20 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 400
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        Periodic        Task0            1            release                0
+0        Periodic        Task1            1            release                0
+0        Periodic        Task2            1            release                0
+0        Periodic        Task3            1            release                0
+0        Periodic        Task4            1            release                0
+0        Periodic        Task5            1            release                0
+0        Periodic        Task6            1            release                0
+0        Periodic        Task7            1            release                0
+0        Periodic        Task8            1            release                0
+0        Periodic        Task9            1            release                0
+40       Periodic        Task0            1            complete               40
+44       Periodic        Task1            1            complete               44
+48       Periodic        Task2            1            complete               48
+52       Periodic        Task3            1            complete               52
+56       Periodic        Task4            1            complete               56
+60       Periodic        Task5            1            complete               60
+64       Periodic        Task6            1            complete               64
+68       Periodic        Task7            1            complete               68
+72       Periodic        Task8            1            complete               72
+76       Periodic        Task9            1            complete               76
+100      Periodic        Task0            2            release                0
+100      Periodic        Task1            2            release                0
+100      Periodic        Task2            2            release                0
+100      Periodic        Task3            2            release                0
+100      Periodic        Task4            2            release                0
+100      Periodic        Task5            2            release                0
+100      Periodic        Task6            2            release                0
+100      Periodic        Task7            2            release                0
+100      Periodic        Task8            2            release                0
+100      Periodic        Task9            2            release                0
+140      Periodic        Task0            2            complete               40
+144      Periodic        Task1            2            complete               44
+148      Periodic        Task2            2            complete               48
+152      Periodic        Task3            2            complete               52
+156      Periodic        Task4            2            complete               56
+160      Periodic        Task5            2            complete               60
+164      Periodic        Task6            2            complete               64
+168      Periodic        Task7            2            complete               68
+172      Periodic        Task8            2            complete               72
+176      Periodic        Task9            2            complete               76
+200      Periodic        Task0            3            release                0
+200      Periodic        Task1            3            release                0
+200      Periodic        Task2            3            release                0
+200      Periodic        Task3            3            release                0
+200      Periodic        Task4            3            release                0
+200      Periodic        Task5            3            release                0
+200      Periodic        Task6            3            release                0
+200      Periodic        Task7            3            release                0
+200      Periodic        Task8            3            release                0
+200      Periodic        Task9            3            release                0
+240      Periodic        Task0            3            complete               40
+244      Periodic        Task1            3            complete               44
+248      Periodic        Task2            3            complete               48
+252      Periodic        Task3            3            complete               52
+256      Periodic        Task4            3            complete               56
+260      Periodic        Task5            3            complete               60
+264      Periodic        Task6            3            complete               64
+268      Periodic        Task7            3            complete               68
+272      Periodic        Task8            3            complete               72
+276      Periodic        Task9            3            complete               76
+300      Periodic        Task0            4            release                0
+300      Periodic        Task1            4            release                0
+300      Periodic        Task2            4            release                0
+300      Periodic        Task3            4            release                0
+300      Periodic        Task4            4            release                0
+300      Periodic        Task5            4            release                0
+300      Periodic        Task6            4            release                0
+300      Periodic        Task7            4            release                0
+300      Periodic        Task8            4            release                0
+300      Periodic        Task9            4            release                0
+340      Periodic        Task0            4            complete               40
+344      Periodic        Task1            4            complete               44
+348      Periodic        Task2            4            complete               48
+352      Periodic        Task3            4            complete               52
+356      Periodic        Task4            4            complete               56
+360      Periodic        Task5            4            complete               60
+364      Periodic        Task6            4            complete               64
+368      Periodic        Task7            4            complete               68
+372      Periodic        Task8            4            complete               72
+376      Periodic        Task9            4            complete               76
+400      Periodic        Task0            5            release                0
+400      Periodic        Task1            5            release                0
+400      Periodic        Task2            5            release                0
+400      Periodic        Task3            5            release                0
+400      Periodic        Task4            5            release                0
+400      Periodic        Task5            5            release                0
+400      Periodic        Task6            5            release                0
+400      Periodic        Task7            5            release                0
+400      Periodic        Task8            5            release                0
+400      Periodic        Task9            5            release                0
+440      Periodic        Task0            5            complete               40
+444      Periodic        Task1            5            complete               44
+448      Periodic        Task2            5            complete               48
+452      Periodic        Task3            5            complete               52
+456      Periodic        Task4            5            complete               56
+460      Periodic        Task5            5            complete               60
+464      Periodic        Task6            5            complete               64
+468      Periodic        Task7            5            complete               68
+472      Periodic        Task8            5            complete               72
+476      Periodic        Task9            5            complete               76
+500      Periodic        Task0            6            release                0
+500      Periodic        Task1            6            release                0
+500      Periodic        Task2            6            release                0
+500      Periodic        Task3            6            release                0
+500      Periodic        Task4            6            release                0
+500      Periodic        Task5            6            release                0
+500      Periodic        Task6            6            release                0
+500      Periodic        Task7            6            release                0
+500      Periodic        Task8            6            release                0
+500      Periodic        Task9            6            release                0
+540      Periodic        Task0            6            complete               40
+544      Periodic        Task1            6            complete               44
+548      Periodic        Task2            6            complete               48
+552      Periodic        Task3            6            complete               52
+556      Periodic        Task4            6            complete               56
+560      Periodic        Task5            6            complete               60
+564      Periodic        Task6            6            complete               64
+568      Periodic        Task7            6            complete               68
+572      Periodic        Task8            6            complete               72
+576      Periodic        Task9            6            complete               76
+600      Periodic        Task0            7            release                0
+600      Periodic        Task1            7            release                0
+600      Periodic        Task2            7            release                0
+600      Periodic        Task3            7            release                0
+600      Periodic        Task4            7            release                0
+600      Periodic        Task5            7            release                0
+600      Periodic        Task6            7            release                0
+600      Periodic        Task7            7            release                0
+600      Periodic        Task8            7            release                0
+600      Periodic        Task9            7            release                0
+640      Periodic        Task0            7            complete               40
+644      Periodic        Task1            7            complete               44
+648      Periodic        Task2            7            complete               48
+652      Periodic        Task3            7            complete               52
+656      Periodic        Task4            7            complete               56
+660      Periodic        Task5            7            complete               60
+664      Periodic        Task6            7            complete               64
+668      Periodic        Task7            7            complete               68
+672      Periodic        Task8            7            complete               72
+676      Periodic        Task9            7            complete               76
+700      Periodic        Task0            8            release                0
+700      Periodic        Task1            8            release                0
+700      Periodic        Task2            8            release                0
+700      Periodic        Task3            8            release                0
+700      Periodic        Task4            8            release                0
+700      Periodic        Task5            8            release                0
+700      Periodic        Task6            8            release                0
+700      Periodic        Task7            8            release                0
+700      Periodic        Task8            8            release                0
+700      Periodic        Task9            8            release                0
+740      Periodic        Task0            8            complete               40
+744      Periodic        Task1            8            complete               44
+748      Periodic        Task2            8            complete               48
+752      Periodic        Task3            8            complete               52
+756      Periodic        Task4            8            complete               56
+760      Periodic        Task5            8            complete               60
+764      Periodic        Task6            8            complete               64
+768      Periodic        Task7            8            complete               68
+772      Periodic        Task8            8            complete               72
+776      Periodic        Task9            8            complete               76
+800      Periodic        Task0            9            release                0
+800      Periodic        Task1            9            release                0
+800      Periodic        Task2            9            release                0
+800      Periodic        Task3            9            release                0
+800      Periodic        Task4            9            release                0
+800      Periodic        Task5            9            release                0
+800      Periodic        Task6            9            release                0
+800      Periodic        Task7            9            release                0
+800      Periodic        Task8            9            release                0
+800      Periodic        Task9            9            release                0
+840      Periodic        Task0            9            complete               40
+844      Periodic        Task1            9            complete               44
+848      Periodic        Task2            9            complete               48
+852      Periodic        Task3            9            complete               52
+856      Periodic        Task4            9            complete               56
+860      Periodic        Task5            9            complete               60
+864      Periodic        Task6            9            complete               64
+868      Periodic        Task7            9            complete               68
+872      Periodic        Task8            9            complete               72
+876      Periodic        Task9            9            complete               76
+900      Periodic        Task0            10           release                0
+900      Periodic        Task1            10           release                0
+900      Periodic        Task2            10           release                0
+900      Periodic        Task3            10           release                0
+900      Periodic        Task4            10           release                0
+900      Periodic        Task5            10           release                0
+900      Periodic        Task6            10           release                0
+900      Periodic        Task7            10           release                0
+900      Periodic        Task8            10           release                0
+900      Periodic        Task9            10           release                0
+940      Periodic        Task0            10           complete               40
+944      Periodic        Task1            10           complete               44
+948      Periodic        Task2            10           complete               48
+952      Periodic        Task3            10           complete               52
+956      Periodic        Task4            10           complete               56
+960      Periodic        Task5            10           complete               60
+964      Periodic        Task6            10           complete               64
+968      Periodic        Task7            10           complete               68
+972      Periodic        Task8            10           complete               72
+976      Periodic        Task9            10           complete               76
+1000     Periodic        Task0            11           release                0
+1000     Periodic        Task1            11           release                0
+1000     Periodic        Task2            11           release                0
+1000     Periodic        Task3            11           release                0
+1000     Periodic        Task4            11           release                0
+1000     Periodic        Task5            11           release                0
+1000     Periodic        Task6            11           release                0
+1000     Periodic        Task7            11           release                0
+1000     Periodic        Task8            11           release                0
+1000     Periodic        Task9            11           release                0
+1040     Periodic        Task0            11           complete               40
+1044     Periodic        Task1            11           complete               44
+1048     Periodic        Task2            11           complete               48
+1052     Periodic        Task3            11           complete               52
+1056     Periodic        Task4            11           complete               56
+1060     Periodic        Task5            11           complete               60
+1064     Periodic        Task6            11           complete               64
+1068     Periodic        Task7            11           complete               68
+1072     Periodic        Task8            11           complete               72
+1076     Periodic        Task9            11           complete               76
+1100     Periodic        Task0            12           release                0
+1100     Periodic        Task1            12           release                0
+1100     Periodic        Task2            12           release                0
+1100     Periodic        Task3            12           release                0
+1100     Periodic        Task4            12           release                0
+1100     Periodic        Task5            12           release                0
+1100     Periodic        Task6            12           release                0
+1100     Periodic        Task7            12           release                0
+1100     Periodic        Task8            12           release                0
+1100     Periodic        Task9            12           release                0
+1140     Periodic        Task0            12           complete               40
+1144     Periodic        Task1            12           complete               44
+1148     Periodic        Task2            12           complete               48
+1152     Periodic        Task3            12           complete               52
+1156     Periodic        Task4            12           complete               56
+1160     Periodic        Task5            12           complete               60
+1164     Periodic        Task6            12           complete               64
+1168     Periodic        Task7            12           complete               68
+1172     Periodic        Task8            12           complete               72
+1176     Periodic        Task9            12           complete               76
+1200     Periodic        Task0            13           release                0
+1200     Periodic        Task1            13           release                0
+1200     Periodic        Task2            13           release                0
+1200     Periodic        Task3            13           release                0
+1200     Periodic        Task4            13           release                0
+1200     Periodic        Task5            13           release                0
+1200     Periodic        Task6            13           release                0
+1200     Periodic        Task7            13           release                0
+1200     Periodic        Task8            13           release                0
+1200     Periodic        Task9            13           release                0
+1240     Periodic        Task0            13           complete               40
+1244     Periodic        Task1            13           complete               44
+1248     Periodic        Task2            13           complete               48
+1252     Periodic        Task3            13           complete               52
+1256     Periodic        Task4            13           complete               56
+1260     Periodic        Task5            13           complete               60
+1264     Periodic        Task6            13           complete               64
+1268     Periodic        Task7            13           complete               68
+1272     Periodic        Task8            13           complete               72
+1276     Periodic        Task9            13           complete               76
+1300     Periodic        Task0            14           release                0
+1300     Periodic        Task1            14           release                0
+1300     Periodic        Task2            14           release                0
+1300     Periodic        Task3            14           release                0
+1300     Periodic        Task4            14           release                0
+1300     Periodic        Task5            14           release                0
+1300     Periodic        Task6            14           release                0
+1300     Periodic        Task7            14           release                0
+1300     Periodic        Task8            14           release                0
+1300     Periodic        Task9            14           release                0
+1340     Periodic        Task0            14           complete               40
+1344     Periodic        Task1            14           complete               44
+1348     Periodic        Task2            14           complete               48
+1352     Periodic        Task3            14           complete               52
+1356     Periodic        Task4            14           complete               56
+1360     Periodic        Task5            14           complete               60
+1364     Periodic        Task6            14           complete               64
+1368     Periodic        Task7            14           complete               68
+1372     Periodic        Task8            14           complete               72
+1376     Periodic        Task9            14           complete               76
+1400     Periodic        Task0            15           release                0
+1400     Periodic        Task1            15           release                0
+1400     Periodic        Task2            15           release                0
+1400     Periodic        Task3            15           release                0
+1400     Periodic        Task4            15           release                0
+1400     Periodic        Task5            15           release                0
+1400     Periodic        Task6            15           release                0
+1400     Periodic        Task7            15           release                0
+1400     Periodic        Task8            15           release                0
+1400     Periodic        Task9            15           release                0
+1440     Periodic        Task0            15           complete               40
+1444     Periodic        Task1            15           complete               44
+1448     Periodic        Task2            15           complete               48
+1452     Periodic        Task3            15           complete               52
+1456     Periodic        Task4            15           complete               56
+1460     Periodic        Task5            15           complete               60
+1464     Periodic        Task6            15           complete               64
+1468     Periodic        Task7            15           complete               68
+1472     Periodic        Task8            15           complete               72
+1476     Periodic        Task9            15           complete               76
+1500     Periodic        Task0            16           release                0
+1500     Periodic        Task1            16           release                0
+1500     Periodic        Task2            16           release                0
+1500     Periodic        Task3            16           release                0
+1500     Periodic        Task4            16           release                0
+1500     Periodic        Task5            16           release                0
+1500     Periodic        Task6            16           release                0
+1500     Periodic        Task7            16           release                0
+1500     Periodic        Task8            16           release                0
+1500     Periodic        Task9            16           release                0
+1540     Periodic        Task0            16           complete               40
+1544     Periodic        Task1            16           complete               44
+1548     Periodic        Task2            16           complete               48
+1552     Periodic        Task3            16           complete               52
+1556     Periodic        Task4            16           complete               56
+1560     Periodic        Task5            16           complete               60
+1564     Periodic        Task6            16           complete               64
+1568     Periodic        Task7            16           complete               68
+1572     Periodic        Task8            16           complete               72
+1576     Periodic        Task9            16           complete               76
+1600     Periodic        Task0            17           release                0
+1600     Periodic        Task1            17           release                0
+1600     Periodic        Task2            17           release                0
+1600     Periodic        Task3            17           release                0
+1600     Periodic        Task4            17           release                0
+1600     Periodic        Task5            17           release                0
+1600     Periodic        Task6            17           release                0
+1600     Periodic        Task7            17           release                0
+1600     Periodic        Task8            17           release                0
+1600     Periodic        Task9            17           release                0
+1640     Periodic        Task0            17           complete               40
+1644     Periodic        Task1            17           complete               44
+1648     Periodic        Task2            17           complete               48
+1652     Periodic        Task3            17           complete               52
+1656     Periodic        Task4            17           complete               56
+1660     Periodic        Task5            17           complete               60
+1664     Periodic        Task6            17           complete               64
+1668     Periodic        Task7            17           complete               68
+1672     Periodic        Task8            17           complete               72
+1676     Periodic        Task9            17           complete               76
+1700     Periodic        Task0            18           release                0
+1700     Periodic        Task1            18           release                0
+1700     Periodic        Task2            18           release                0
+1700     Periodic        Task3            18           release                0
+1700     Periodic        Task4            18           release                0
+1700     Periodic        Task5            18           release                0
+1700     Periodic        Task6            18           release                0
+1700     Periodic        Task7            18           release                0
+1700     Periodic        Task8            18           release                0
+1700     Periodic        Task9            18           release                0
+1740     Periodic        Task0            18           complete               40
+1744     Periodic        Task1            18           complete               44
+1748     Periodic        Task2            18           complete               48
+1752     Periodic        Task3            18           complete               52
+1756     Periodic        Task4            18           complete               56
+1760     Periodic        Task5            18           complete               60
+1764     Periodic        Task6            18           complete               64
+1768     Periodic        Task7            18           complete               68
+1772     Periodic        Task8            18           complete               72
+1776     Periodic        Task9            18           complete               76
+1800     Periodic        Task0            19           release                0
+1800     Periodic        Task1            19           release                0
+1800     Periodic        Task2            19           release                0
+1800     Periodic        Task3            19           release                0
+1800     Periodic        Task4            19           release                0
+1800     Periodic        Task5            19           release                0
+1800     Periodic        Task6            19           release                0
+1800     Periodic        Task7            19           release                0
+1800     Periodic        Task8            19           release                0
+1800     Periodic        Task9            19           release                0
+1840     Periodic        Task0            19           complete               40
+1844     Periodic        Task1            19           complete               44
+1848     Periodic        Task2            19           complete               48
+1852     Periodic        Task3            19           complete               52
+1856     Periodic        Task4            19           complete               56
+1860     Periodic        Task5            19           complete               60
+1864     Periodic        Task6            19           complete               64
+1868     Periodic        Task7            19           complete               68
+1872     Periodic        Task8            19           complete               72
+1876     Periodic        Task9            19           complete               76
+1900     Periodic        Task0            20           release                0
+1900     Periodic        Task1            20           release                0
+1900     Periodic        Task2            20           release                0
+1900     Periodic        Task3            20           release                0
+1900     Periodic        Task4            20           release                0
+1900     Periodic        Task5            20           release                0
+1900     Periodic        Task6            20           release                0
+1900     Periodic        Task7            20           release                0
+1900     Periodic        Task8            20           release                0
+1900     Periodic        Task9            20           release                0
+1940     Periodic        Task0            20           complete               40
+1944     Periodic        Task1            20           complete               44
+1948     Periodic        Task2            20           complete               48
+1952     Periodic        Task3            20           complete               52
+1956     Periodic        Task4            20           complete               56
+1960     Periodic        Task5            20           complete               60
+1964     Periodic        Task6            20           complete               64
+1968     Periodic        Task7            20           complete               68
+1972     Periodic        Task8            20           complete               72
+1976     Periodic        Task9            20           complete               76
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Max tasks (10) scheduled successfully with 76%% RM Load (Fails L&L, Passes HB).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+Task0            21    20    0        0         0         40       40    
+Task1            21    20    0        0         0         44       44    
+Task2            21    20    0        0         0         48       48    
+Task3            21    20    0        0         0         52       52    
+Task4            21    20    0        0         0         56       56    
+Task5            21    20    0        0         0         60       60    
+Task6            21    20    0        0         0         64       64    
+Task7            21    20    0        0         0         68       68    
+Task8            21    20    0        0         0         72       72    
+Task9            21    20    0        0         0         76       76    
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 20] ---
+
+
+--- START TRACE [TEST 21] ---
+
+=== TEST 21: Queue Full Rejection (Aperiodic Limit) ===
+
+--- TEST 21 TRACE DUMP ---
+
+=== TRACE DUMP START ===
+Total records: 37
+Tick     Type            Task             Iteration    Event                  Data
+----------------------------------------------------------------------------------
+0        PollingServer   PollSrv          1            release                0
+0        PollingServer   PollSrv          1            server refill          100
+0        Aperiodic       FloodJob         1            release                0
+10       Aperiodic       FloodJob         1            complete               0
+10       Aperiodic       FloodJob         1            release                0
+20       Aperiodic       FloodJob         1            complete               0
+20       Aperiodic       FloodJob         1            release                0
+30       Aperiodic       FloodJob         1            complete               0
+30       Aperiodic       FloodJob         1            release                0
+40       Aperiodic       FloodJob         1            complete               0
+40       Aperiodic       FloodJob         1            release                0
+50       Aperiodic       FloodJob         1            complete               0
+50       Aperiodic       FloodJob         1            release                0
+60       Aperiodic       FloodJob         1            complete               0
+60       Aperiodic       FloodJob         1            release                0
+70       Aperiodic       FloodJob         1            complete               0
+70       Aperiodic       FloodJob         1            release                0
+80       Aperiodic       FloodJob         1            complete               0
+80       Aperiodic       FloodJob         1            release                0
+90       Aperiodic       FloodJob         1            complete               0
+90       Aperiodic       FloodJob         1            release                0
+100      Aperiodic       FloodJob         1            aperiodic kill         1000
+100      PollingServer   PollSrv          1            server exhaust         0
+101      PollingServer   PollSrv          1            server refill          101
+200      PollingServer   PollSrv          2            release                0
+200      PollingServer   PollSrv          2            server refill          100
+200      PollingServer   PollSrv          2            server refill          0
+400      PollingServer   PollSrv          3            release                0
+400      PollingServer   PollSrv          3            server refill          100
+400      PollingServer   PollSrv          3            server refill          0
+600      PollingServer   PollSrv          4            release                0
+600      PollingServer   PollSrv          4            server refill          100
+600      PollingServer   PollSrv          4            server refill          0
+800      PollingServer   PollSrv          5            release                0
+800      PollingServer   PollSrv          5            server refill          100
+800      PollingServer   PollSrv          5            server refill          0
+1000     PollingServer   PollSrv          6            release                0
+=== TRACE DUMP END ===
+
+--- END ---
+
+[VERDICT] PASS - Queue rejected 2 excess jobs; server completed 9, killed 1 at budget boundary (correct).
+
+=== STATISTICS DUMP START ===
+Task            Jobs  Done  DL Miss  DL Miss%  Overruns  AvgResp  WCRT         
+-------------------------------------------------------------------------------
+PollSrv          6     5     0        0         0         20       101   
+=== STATISTICS DUMP END ===
+
+qemu-system-arm: terminating on signal 15 from pid 2585 (python3)
+
+--- END TRACE [TEST 21] ---
+
